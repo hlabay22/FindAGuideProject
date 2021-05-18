@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <title>Welcome To Xaron Find A Guide</title>
+    <title>Welcome To Guide4U - Find A Guide</title>
     <link rel = "icon" href ="openingPageImage/x.png" type="image/x-icon"> 
 </head>
 <body>
