@@ -13,11 +13,11 @@
 
     <!-- NavBar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="index.php">Xaron</a>
+        <a class="navbar-brand" href="index.php">Guide4U</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
+
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -31,9 +31,7 @@
             </li>
 
           </form>
-
-        
-        <a href="Login.php"> <button type="submit" class="btn btn-danger" style="margin-left: 68em;" >Login</button></a>
+        <a href="Login.php"> <button type="submit" class="btn btn-danger" style="position: absolute; right: 0; margin-right: 15px;" >Login</button></a>
         </div>
       </nav>
 
