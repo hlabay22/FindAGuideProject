@@ -10,7 +10,7 @@
     <link rel = "icon" href ="openingPageImage/x.png" type="image/x-icon"> 
 </head>
 <body>
-
+    <!--haron the king-->
     <!-- NavBar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.php">Guide4U</a>
