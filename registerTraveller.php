@@ -9,6 +9,21 @@
     <script src="datepicker.js"></script>
     <title>Traveller Registertion</title>
     <link rel = "icon" href ="openingPageImage/x.png" type="image/x-icon"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <style> 
+    /*for hide input form*/
+.form{
+ float:left;  
+  list-style:none;
+}
+.hidden-form{
+  visibility:hidden;
+  }
+.show-form{
+visibility: visible !important;
+}</style>
+
 </head>
 <body>
 
@@ -37,9 +52,9 @@
       </nav>
 
     <!-- Image -->
-      <div class="text-center">
+      <!-- <div class="text-center">
         <img src="openingPageImage/x.png" class="rounded" alt="x logo" height="100" width="150">  
-      </div>
+      </div> -->
 
        <!-- PHP --> 
 
@@ -125,7 +140,9 @@
     </div>
 
       <!-- Container-->
-      <div class="jumbotron">
+      <div class="jumbotron" style="background-image: url('openingPageImage/x.png'); background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;">
       <!-- Registertion form-->
       <form action="registerTraveller.php" method="post">
         <fieldset>
@@ -134,39 +151,39 @@
           <!-- Email input-->
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" name="emailTraveller" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control" name="emailTraveller" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" style="width: 20%;">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
 
           <!-- Password-->
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" name="passwordTraveller" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" class="form-control" name="passwordTraveller" id="exampleInputPassword1" placeholder="Password" style="width: 20%;">
           </div>
           <!-- First Name -->
           <div class="form-group">
             <label for="firstNameInput">First Name</label>
-            <input type="text" class="form-control" name="firsNameTraveller" id="firstNameInput" rows="1" pattern="^[a-zA-Z]+$"></input>
+            <input type="text" class="form-control" name="firsNameTraveller" id="firstNameInput" rows="1" pattern="^[a-zA-Z]+$" style="width: 20%;"></input>
           </div>
 
           <!-- Last Name -->
           <div class="form-group">
             <label for="lastNameInput">Last Name</label>
-            <input type="text" class="form-control" name="lastNameTraveller" id="lastNameInput" rows="1" pattern="^[a-zA-Z]+$"></input>
+            <input type="text" class="form-control" name="lastNameTraveller" id="lastNameInput" rows="1" pattern="^[a-zA-Z]+$" style="width: 20%;"></input>
           </div>
 
         <!-- Date of Birth-->
           <div class="form-group row">
-           <label for="example-date-input" class="col-2 col-form-label">Date Of Birth</label><br>
+           <label for="example-date-input" class="col-2 col-form-label" style="margin-left:0.5em;">Date Of Birth</label><br>
             <div class="col-10">
-              <input class="form-control" type="date" value="2011-08-19" name="dobTraveller" id="example-date-input">
+              <input class="form-control" type="date" value="2011-08-19" name="dobTraveller" id="example-date-input" style="width: 24%;">
             </div>
           </div>  
 
           <!-- Selcet Gender-->
           <div class="form-group">
-            <label for="genderSelect">Gender</label>
-            <select class="form-control" name="genderTraveller" id="genderSelect">
+            <label for="genderSelect" >Gender</label>
+            <select class="form-control" name="genderTraveller" id="genderSelect" style="width: 20%;">
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
 
@@ -175,12 +192,12 @@
           <!-- Select City-->
           <div class="form-group">
             <label for="cityTextarea">City</label>
-            <textarea class="form-control" name="cityTraveller" id="cityTextarea" rows="1"></textarea>
+            <textarea class="form-control" name="cityTraveller" id="cityTextarea" rows="1" style="width: 20%;"></textarea>
           </div>
           <!-- Selcet Country-->
           <div class="form-group">
             <label for="countrySelect">Country</label>
-            <select class="form-control" name="countryTraveller" id="countrySelect">
+            <select class="form-control" name="countryTraveller" id="countrySelect"  style="width: 20%;">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Åland Islands">Åland Islands</option>
                 <option value="Albania">Albania</option>
@@ -429,9 +446,9 @@
           </div>
                   <!-- Selcet Language 1 -->
 
-          <div class="form-group">
-            <label for="languageSelect">Select Language 1 (Required)</label>
-            <select class="form-control" name="lang1Traveller" id="languageSelect1">
+          <div class="form-group" style="display: inline;">
+            <label for="languageSelect" >Select Language 1 (Required)</label>
+            <select class="form-control" name="lang1Traveller" id="languageSelect1" style="width: 20%; ">
                 <option value="Afrikaans">Afrikaans</option>
                 <option value="Albanian">Albanian</option>
                 <option value="Arabic">Arabic</option>
@@ -508,10 +525,87 @@
           </div>
 
                     <!-- Selcet Language 2 -->
-
-                    <div class="form-group">
+                    <div class="form">
+                      <input class="form-text" type="text" name="name" value="Language 2 (Optional)" style=" text-decoration:none; color:#FFF; .form-text:hover:text-decoration:none; color: #B9D3EE;">  
+                      <select class="hidden-form" type="text" name="lang2Traveller" id="languageSelect2" >
+                      <option value="">None</option>
+                      <option value="Afrikaans">Afrikaans</option>
+                      <option value="Albanian">Albanian</option>
+                      <option value="Arabic">Arabic</option>
+                      <option value="Armenian">Armenian</option>
+                      <option value="Basque">Basque</option>
+                      <option value="Bengali">Bengali</option>
+                      <option value="Bulgarian">Bulgarian</option>
+                      <option value="Catalan">Catalan</option>
+                      <option value="Cambodian">Cambodian</option>
+                      <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                      <option value="Croatian">Croatian</option>
+                      <option value="Czech">Czech</option>
+                      <option value="Danish">Danish</option>
+                      <option value="Dutch">Dutch</option>
+                      <option value="English">English</option>
+                      <option value="Estonian">Estonian</option>
+                      <option value="Fiji">Fiji</option>
+                      <option value="Finnish">Finnish</option>
+                      <option value="French">French</option>
+                      <option value="Georgian">Georgian</option>
+                      <option value="German">German</option>
+                      <option value="Greek">Greek</option>
+                      <option value="Gujarati">Gujarati</option>
+                      <option value="Hebrew">Hebrew</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Hungarian">Hungarian</option>
+                      <option value="Icelandic">Icelandic</option>
+                      <option value="Indonesian">Indonesian</option>
+                      <option value="Irish">Irish</option>
+                      <option value="Italian">Italian</option>
+                      <option value="Japanese">Japanese</option>
+                      <option value="Javanese">Javanese</option>
+                      <option value="Korean">Korean</option>
+                      <option value="Latin">Latin</option>
+                      <option value="Latvian">Latvian</option>
+                      <option value="Lithuanian">Lithuanian</option>
+                      <option value="Macedonian">Macedonian</option>
+                      <option value="Malay">Malay</option>
+                      <option value="Malayalam">Malayalam</option>
+                      <option value="Maltese">Maltese</option>
+                      <option value="Maori">Maori</option>
+                      <option value="Marathi">Marathi</option>
+                      <option value="Mongolian">Mongolian</option>
+                      <option value="Nepali">Nepali</option>
+                      <option value="Norwegian">Norwegian</option>
+                      <option value="Persian">Persian</option>
+                      <option value="Polish">Polish</option>
+                      <option value="Portuguese">Portuguese</option>
+                      <option value="Punjabi">Punjabi</option>
+                      <option value="Quechua">Quechua</option>
+                      <option value="Romanian">Romanian</option>
+                      <option value="Russian">Russian</option>
+                      <option value="Samoan">Samoan</option>
+                      <option value="Serbian">Serbian</option>
+                      <option value="Slovak">Slovak</option>
+                      <option value="Slovenian">Slovenian</option>
+                      <option value="Spanish">Spanish</option>
+                      <option value="Swahili">Swahili</option>
+                      <option value="Swedish">Swedish </option>
+                      <option value="Tamil">Tamil</option>
+                      <option value="Tatar">Tatar</option>
+                      <option value="Telugu">Telugu</option>
+                      <option value="Thai">Thai</option>
+                      <option value="Tibetan">Tibetan</option>
+                      <option value="Tonga">Tonga</option>
+                      <option value="Turkish">Turkish</option>
+                      <option value="Ukrainian">Ukrainian</option>
+                      <option value="Urdu">Urdu</option>
+                      <option value="Uzbek">Uzbek</option>
+                      <option value="Vietnamese">Vietnamese</option>
+                      <option value="Welsh">Welsh</option>
+                      <option value="Xhosa">Xhosa</option>
+            </select>
+                    </div> 
+                    <!-- <div class="form-group">
             <label for="languageSelect2">Select Language 2 (Optional)</label>
-            <select class="form-control" name="lang2Traveller" id="languageSelect2">
+            <select class="form-control" name="lang2Traveller" id="languageSelect2" style="width: 20%;">
                 <option value="">None</option>
                 <option value="Afrikaans">Afrikaans</option>
                 <option value="Albanian">Albanian</option>
@@ -586,13 +680,91 @@
                 <option value="Welsh">Welsh</option>
                 <option value="Xhosa">Xhosa</option>
             </select>
-          </div>
+          </div> -->
 
                     <!-- Selcet Language 3 -->
-
-                    <div class="form-group">
+                    <div class="form">
+                    
+                      <input class="form-text" type="text" name="name" value="Language 3 (Optional)" style="margin-left:1em; text-decoration:none; color:#FFF; .form-text:hover:text-decoration:none; color: #B9D3EE;" >  
+                      <select class="hidden-form" type="text" name="lang3Traveller" id="languageSelect3" style="margin-left:1em; >
+                      <option value="">None</option>
+                        <option value="Afrikaans">Afrikaans</option>
+                        <option value="Albanian">Albanian</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="Armenian">Armenian</option>
+                        <option value="Basque">Basque</option>
+                        <option value="Bengali">Bengali</option>
+                        <option value="Bulgarian">Bulgarian</option>
+                        <option value="Catalan">Catalan</option>
+                        <option value="Cambodian">Cambodian</option>
+                        <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                        <option value="Croatian">Croatian</option>
+                        <option value="Czech">Czech</option>
+                        <option value="Danish">Danish</option>
+                        <option value="Dutch">Dutch</option>
+                        <option value="English">English</option>
+                        <option value="Estonian">Estonian</option>
+                        <option value="Fiji">Fiji</option>
+                        <option value="Finnish">Finnish</option>
+                        <option value="French">French</option>
+                        <option value="Georgian">Georgian</option>
+                        <option value="German">German</option>
+                        <option value="Greek">Greek</option>
+                        <option value="Gujarati">Gujarati</option>
+                        <option value="Hebrew">Hebrew</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Hungarian">Hungarian</option>
+                        <option value="Icelandic">Icelandic</option>
+                        <option value="Indonesian">Indonesian</option>
+                        <option value="Irish">Irish</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Javanese">Javanese</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Latin">Latin</option>
+                        <option value="Latvian">Latvian</option>
+                        <option value="Lithuanian">Lithuanian</option>
+                        <option value="Macedonian">Macedonian</option>
+                        <option value="Malay">Malay</option>
+                        <option value="Malayalam">Malayalam</option>
+                        <option value="Maltese">Maltese</option>
+                        <option value="Maori">Maori</option>
+                        <option value="Marathi">Marathi</option>
+                        <option value="Mongolian">Mongolian</option>
+                        <option value="Nepali">Nepali</option>
+                        <option value="Norwegian">Norwegian</option>
+                        <option value="Persian">Persian</option>
+                        <option value="Polish">Polish</option>
+                        <option value="Portuguese">Portuguese</option>
+                        <option value="Punjabi">Punjabi</option>
+                        <option value="Quechua">Quechua</option>
+                        <option value="Romanian">Romanian</option>
+                        <option value="Russian">Russian</option>
+                        <option value="Samoan">Samoan</option>
+                        <option value="Serbian">Serbian</option>
+                        <option value="Slovak">Slovak</option>
+                        <option value="Slovenian">Slovenian</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Swahili">Swahili</option>
+                        <option value="Swedish">Swedish </option>
+                        <option value="Tamil">Tamil</option>
+                        <option value="Tatar">Tatar</option>
+                        <option value="Telugu">Telugu</option>
+                        <option value="Thai">Thai</option>
+                        <option value="Tibetan">Tibetan</option>
+                        <option value="Tonga">Tonga</option>
+                        <option value="Turkish">Turkish</option>
+                        <option value="Ukrainian">Ukrainian</option>
+                        <option value="Urdu">Urdu</option>
+                        <option value="Uzbek">Uzbek</option>
+                        <option value="Vietnamese">Vietnamese</option>
+                        <option value="Welsh">Welsh</option>
+                        <option value="Xhosa">Xhosa</option>
+            </select>
+                    </div> 
+                    <!-- <div class="form-group">
             <label for="languageSelect3">Select Language 3 (optional)</label>
-            <select class="form-control" name="lang3Traveller" id="languageSelect3">
+            <select class="form-control" name="lang3Traveller" id="languageSelect3" style="width: 20%;">
                 <option value="">None</option>
                 <option value="Afrikaans">Afrikaans</option>
                 <option value="Albanian">Albanian</option>
@@ -667,7 +839,7 @@
                 <option value="Welsh">Welsh</option>
                 <option value="Xhosa">Xhosa</option>
             </select>
-          </div>
+          </div> -->
 
           <br>
           <hr>
@@ -675,7 +847,7 @@
           <!-- Input Phone Number -->
           <div class="form-group">
             <label for="inputPhoneNumber">Phone Number</label>
-            <input type="number"  class="form-control" name="phoneTraveller" oninput="validity.valid||(value='');">
+            <input type="number"  class="form-control" name="phoneTraveller" oninput="validity.valid||(value='');" style="width: 20%;">
           </div>
 
           <hr>
@@ -690,7 +862,7 @@
 
             <div class="form-group">
               <label for="travelPrefSelect1">Select Travel Style 1 (Required)</label>
-              <select class="form-control" name="travelStyle1Traveller" id="travelPrefSelect1">
+              <select class="form-control" name="travelStyle1Traveller" id="travelPrefSelect1" style="width: 20%;">
                   <option value="Adventure">Adventure</option>
                   <option value="Architecture">Architecture</option>
                   <option value="Art">Art</option>
@@ -713,7 +885,7 @@
 
             <div class="form-group">
               <label for="travelPrefSelect2">Select Travel Style 2 (Optional)</label>
-              <select class="form-control" name="travelStyle2Traveller" id="travelPrefSelect2">
+              <select class="form- id="travelPrefSelect2" style="width: 2control" name="travelStyle2Traveller"0%;">
                   <option value="">None</option>
                   <option value="Adventure">Adventure</option>
                   <option value="Architecture">Architecture</option>
@@ -736,7 +908,7 @@
 
             <div class="form-group">
               <label for="travelPrefSelect3">Select Travel Style 3 (Optional)</label>
-              <select class="form-control" name="travelStyle3Traveller" id="travelPrefSelect3">
+              <select class="form-control" name="travelStyle3Traveller" id="travelPrefSelect3" style="width: 20%;">
                   <option value="">None</option>
                   <option value="Adventure">Adventure</option>
                   <option value="Architecture">Architecture</option>
@@ -763,7 +935,7 @@
             <legend>Transportation Type</legend>
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionTransport" id="optionsRadios1" value="privateVehicle" checked="">
+                <input type="radio" class="form-check-input" name="optionTransport" id="optionsRadios1" value="privateVehicle" checked="" >
                 Private Vehicle
               </label>
             </div>
@@ -779,7 +951,7 @@
 
           <div class="form-group">
             <label for="aboutTextarea">About Me (Optional)</label>
-            <textarea class="form-control" name="aboutMeTraveller" id="aboutTextarea" rows="3"></textarea>
+            <textarea class="form-control" name="aboutMeTraveller" id="aboutTextarea" rows="3" style="width: 20%;"></textarea>
           </div>
 
 
@@ -811,3 +983,8 @@
       </form>
       </div>
 
+<script>
+$('.form-text').click(function(){
+$(this).next().toggleClass('show-form');
+});
+</script>

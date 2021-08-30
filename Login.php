@@ -45,10 +45,10 @@
 </div>
 
     <!-- Image -->
-      <div class="text-center">
+      <!-- <div class="text-center">
         <img src="openingPageImage/x.png" class="rounded" alt="x logo" height="100" width="150">  
       </div>
-      <h2 align="center">Login</h2><br />
+      <h2 align="center">Login</h2><br /> -->
 
       
                   <!-- PHP --> 
@@ -77,8 +77,16 @@
     if(isset($_POST['submitTraveller'])){
         $email = $_POST['emailTraveller'];
         $password = $_POST['passwordTraveller'];
-  
-
+         //admin login
+        if($email=='admin' && $password=='admin')
+        {
+          
+          echo "<script>
+          window.location.href='admin.php';
+          </script>;"
+          ;
+        }
+   
 
 
         $result = $mysqli->query("SELECT * FROM travellerusers WHERE email = '$email'");
@@ -97,7 +105,7 @@
         define("TRAVELSTYLE2",$arr["travelStyle2"]);
         define("TRAVELSTYLE3",$arr["travelStyle3"]);
         define("TRANSPORT",$arr["transportationType"]);
-
+        define("DOB",$arr["dob"]);
 
         if($email==EMAIL && $password==PASS)
         {
@@ -112,6 +120,7 @@
           $_SESSION['user_travelStyle2']=TRAVELSTYLE2;
           $_SESSION['user_travelStyle3']=TRAVELSTYLE3;
           $_SESSION['user_transport']=TRANSPORT;
+          $_SESSION['user_dob']=DOB;
           $name=$_SESSION['user_name'];
 
           echo "<script>
@@ -205,10 +214,10 @@
                         <h3>Traveller Login</h3>
                         <form action="Login.php" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="emailTraveller" placeholder="Your Email *" value="" />
+                                <input type="text" class="form-control" name="emailTraveller" placeholder="Your Email *" value="" style="width: 40%;"/>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" name="passwordTraveller" placeholder="Your Password *" value="" />
+                                <input type="password" class="form-control" name="passwordTraveller" placeholder="Your Password *" value="" style="width: 40%;" />
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="submitTraveller" class="btnSubmit" value="Login" />
@@ -233,10 +242,10 @@
                 <h3>Local Guide Login</h3>
                 <form action="Login.php" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="emailLocalGuide" placeholder="Your Email *" value="" />
+                        <input type="text" class="form-control" name="emailLocalGuide" placeholder="Your Email *" value="" style="width: 40%;" />
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="passwordLocalGuide" placeholder="Your Password *" value="" />
+                        <input type="password" class="form-control" name="passwordLocalGuide" placeholder="Your Password *" value="" style="width: 40%;" />
                     </div>
                     <div class="form-group">
                         <input type="submit" name="submitLocalGuide" class="btnSubmit" value="Login" />

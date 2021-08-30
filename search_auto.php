@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+//user details//
 $lang1= $_SESSION['user_lang1'];
 $lang2= $_SESSION['user_lang2'];
 $lang3= $_SESSION['user_lang3'];
@@ -9,10 +9,11 @@ $travelStyle2=$_SESSION['user_travelStyle2'];
 $travelStyle2=$_SESSION['user_travelStyle3'];
 $gender= $_SESSION['user_gender'];
 $lang1= $_SESSION['user_lang1'];
-
+$email= $_SESSION['user_log'];
 $transport=$_SESSION['user_transport'];
-
-
+$dob=$_SESSION['user_dob'];
+$travellerYear=date('Y', strtotime($dob));
+$travellerYear_15=$travellerYear+15; //traveller year +15 (for perfect match)
 
 
 $db_user = "root";
@@ -28,87 +29,166 @@ if ($mysqli2->connect_error) {
     $country=$_POST['countryTraveller'];
     $city = $_POST['place'];
     $date=$_POST['date'];
-
-
+    
+  // MUST HAVE CONDITIONS ARE : match on city, country and date availability.
+			  
+	// Option 1 - Perfect Match based On language,travel style,, transportation Type and age difference. [Perfect]
+    
     $result = $mysqli2->query("SELECT * FROM localguideusers
     WHERE city = '$city'
     AND country = '$country'
-    -- AND lang1 = '$lang1'
+    AND lang1 = '$lang1'
     AND travelStyle1 = '$travelStyle1'
     AND transportationType = '$transport'
+    AND YEAR(dob)<='$travellerYear_15'   
     ");
     $arr = $result->fetch_assoc();
-
-    if(mysqli_num_rows($result) > 0)
+     
+    if(mysqli_num_rows($result) = 0)
     {
-// if (true){
-    define("NAME",$arr["firstName"]);
-    define("LASTNAME",$arr["lastName"]);  
-    define("PHONE",$arr["phone"]); 
-    define("GENDER",$arr["gender"]);
-    define("CITY",$arr["city"]);
-    define("COUNTRY",$arr["country"]);
-    define("LANG1",$arr["lang1"]);
-    define("LANG2",$arr["lang2"]);
-    define("LANG3",$arr["lang3"]);
-    define("TRAVELSTYLE1",$arr["travelStyle1"]);
-    define("TRAVELSTYLE2",$arr["travelStyle2"]);
-    define("TRAVELSTYLE3",$arr["travelStyle3"]);
-    define("TRANSPORT",$arr["transportationType"]);
-    define("DATE",$arr["dob"]);
-    define("ABOUT",$arr["aboutMe"]);
-    define("IMAGE",$arr["userImage"]);
+      // Option 2 - Great Match based On language, travel style, transportation Type. [Great]
 
-    
-
-    $_SESSION['guide_firtsName']= NAME;
-    $_SESSION['guide_lastName']= LASTNAME;
-    $_SESSION['guide_phone']= PHONE;
-    $_SESSION['guide_gender']=GENDER;
-    $_SESSION['guide_lang1']=LANG1;
-    $_SESSION['guide_lang2']=LANG2;
-    $_SESSION['guide_lang3']=LANG3;
-    $_SESSION['guide_travelStyle1']=TRAVELSTYLE1;
-    $_SESSION['guide_travelStyle2']=TRAVELSTYLE2;
-    $_SESSION['guide_travelStyle3']=TRAVELSTYLE3;
-    $_SESSION['guide_transport']=TRANSPORT;
-    $_SESSION['guide_date']=DATE;
-    $_SESSION['guide_about']=ABOUT;
-    $_SESSION['guide_image']=IMAGE;
-    
-
+      $result = $mysqli2->query("SELECT * FROM localguideusers
+      WHERE city = '$city'
+      AND country = '$country'
+      AND lang1 = '$lang1'
+      AND travelStyle1 = '$travelStyle1'
+      AND transportationType = '$transport' 
+      ");
+      $arr = $result->fetch_assoc();
     }
-    else{
-       echo "<script>
-    alert('Relevent Guide Not Found, Please Try Again. ');
-    window.location.href='findGuide.php';
-    </script>;";
-    }
+    elseif(mysqli_num_rows($result) = 0)
+      {
+      // Option 3 - Great Match based On language, travel style. [Great]
+
+      $result = $mysqli2->query("SELECT * FROM localguideusers
+      WHERE city = '$city'
+      AND country = '$country'
+      AND lang1 = '$lang1'
+      AND travelStyle1 = '$travelStyle1' 
+      ");
+      $arr = $result->fetch_assoc();
+      }
+      elseif(mysqli_num_rows($result) = 0)
+      {
+        // Option 4 - Good Match based on language, travel style. [Great]
+  
+        $result = $mysqli2->query("SELECT * FROM localguideusers
+        WHERE city = '$city'
+        AND country = '$country'
+        AND lang1 = '$lang1'
+        AND travelStyle1 = '$travelStyle1' 
+        ");
+        $arr = $result->fetch_assoc();
+      }
+      elseif(mysqli_num_rows($result) = 0)
+      {
+        // Option 5 - Good Match based travel style. [Great]
+  
+        $result = $mysqli2->query("SELECT * FROM localguideusers
+        WHERE city = '$city'
+        AND country = '$country'
+        AND travelStyle1 = '$travelStyle1' 
+        ");
+        $arr = $result->fetch_assoc();
+      }
+      elseif(mysqli_num_rows($result) = 0)
+        {
+          // Option 6 - Plain Match base on MUST HAVE CONDITIONS only
+    
+          $result = $mysqli2->query("SELECT * FROM localguideusers
+          WHERE city = '$city'
+          AND country = '$country'
+          ");
+          $arr = $result->fetch_assoc();
+        }
+        elseif(mysqli_num_rows($result) = 0){
+          // Option 7 - NO MATCH
+          echo "<script>
+          alert('Relevent Guide Not Found, Please Try Again. ');
+          window.location.href='findGuide.php';
+          </script>;";
+        }
+        else(mysqli_num_rows($result) > 0){
+
+        
+ 
+    
+                  define("NAME",$arr["firstName"]);
+                  define("LASTNAME",$arr["lastName"]);  
+                  define("PHONE",$arr["phone"]); 
+                  define("GENDER",$arr["gender"]);
+                  define("CITY",$arr["city"]);
+                  define("COUNTRY",$arr["country"]);
+                  define("LANG1",$arr["lang1"]);
+                  define("LANG2",$arr["lang2"]);
+                  define("LANG3",$arr["lang3"]);
+                  define("TRAVELSTYLE1",$arr["travelStyle1"]);
+                  define("TRAVELSTYLE2",$arr["travelStyle2"]);
+                  define("TRAVELSTYLE3",$arr["travelStyle3"]);
+                  define("TRANSPORT",$arr["transportationType"]);
+                  define("DATE",$arr["dob"]);
+                  define("ABOUT",$arr["aboutMe"]);
+                  define("IMAGE",$arr["userImage"]);
+                  define("EMAIL",$arr["email"]);
+
+                  $_SESSION['guide_firtsName']= NAME;
+                  $_SESSION['guide_lastName']= LASTNAME;
+                  $_SESSION['guide_phone']= PHONE;
+                  $_SESSION['guide_gender']=GENDER;
+                  $_SESSION['guide_lang1']=LANG1;
+                  $_SESSION['guide_lang2']=LANG2;
+                  $_SESSION['guide_lang3']=LANG3;
+                  $_SESSION['guide_travelStyle1']=TRAVELSTYLE1;
+                  $_SESSION['guide_travelStyle2']=TRAVELSTYLE2;
+                  $_SESSION['guide_travelStyle3']=TRAVELSTYLE3;
+                  $_SESSION['guide_transport']=TRANSPORT;
+                  $_SESSION['guide_date']=DATE;
+                  $_SESSION['guide_about']=ABOUT;
+                  $_SESSION['guide_image']=IMAGE;
+                  $_SESSION['guide_email']=EMAIL;
 
 
+                }
+                  
 
-if(true){
-$city=$_POST['place'];
-$userTime=$_POST['date'];
-$guideName=($_SESSION['guide_firtsName']);
-$guideLastName=($_SESSION['guide_lastName']);
-$guidePhone=($_SESSION['guide_phone']);
-$guideLang1=($_SESSION['guide_lang1']);
-$guideLang2=($_SESSION['guide_lang2']);
-$guideLang3=($_SESSION['guide_lang3']);
-$guideTravelStyle1=($_SESSION['guide_travelStyle1']);
-$guideTravelStyle2=($_SESSION['guide_travelStyle2']);
-$guideTravelStyle3=($_SESSION['guide_travelStyle3']);
-$guideTrans=($_SESSION['guide_transport']);
-$guideDate=($_SESSION['guide_date']);
-$guideAbout=($_SESSION['guide_about']);
-$guideGender=($_SESSION['guide_gender']);
-$guideTransport=($_SESSION['guide_transport']);
-$guideImage=($_SESSION['guide_image']);
+                  if(true){
+                  $city=$_POST['place'];
+                  $userTime=$_POST['date'];
+                  $guideName=($_SESSION['guide_firtsName']);
+                  $guideLastName=($_SESSION['guide_lastName']);
+                  $guidePhone=($_SESSION['guide_phone']);
+                  $guideLang1=($_SESSION['guide_lang1']);
+                  $guideLang2=($_SESSION['guide_lang2']);
+                  $guideLang3=($_SESSION['guide_lang3']);
+                  $guideTravelStyle1=($_SESSION['guide_travelStyle1']);
+                  $guideTravelStyle2=($_SESSION['guide_travelStyle2']);
+                  $guideTravelStyle3=($_SESSION['guide_travelStyle3']);
+                  $guideTrans=($_SESSION['guide_transport']);
+                  $guideDate=($_SESSION['guide_date']);
+                  $guideAbout=($_SESSION['guide_about']);
+                  $guideGender=($_SESSION['guide_gender']);
+                  $guideTransport=($_SESSION['guide_transport']);
+                  $guideImage=($_SESSION['guide_image']);
+                  $guideEmail=($_SESSION['guide_email']);
+
+                  //check date
+                  $result2 = $mysqli2->query("SELECT * FROM unavailabledates WHERE guide_email = '$guideEmail' AND guide_date  = '$date'");
+                  $arr2 = $result2->fetch_assoc();
+
+// Options 'almost' - Perfect Match based On language,travel style,and age difference. WITH NO DATE AVAILIBILTY  [Almost Perfect]
+
+if(mysqli_num_rows($result2) > 0) // guide is unavaliable in date of travell
+{
+$msg="Almost Match!! - Guide Not Availible in this Date! Contact for info about other Dates";
 
 
 }
+else{
+  $msg='';
+}
 
+}
 
 ?>
 
@@ -121,6 +201,19 @@ $guideImage=($_SESSION['guide_image']);
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <title>Find a Local Guide</title>
+    <style>
+      .blink {
+        animation: blinker 2s linear;
+        color: #FF6347;
+        background-color:white;
+        font-weight: bold;
+      }
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
 </head>
 <body>
 
@@ -162,12 +255,18 @@ $guideImage=($_SESSION['guide_image']);
   <div class="card-header">The Best Match Based On Your Travel Preferences</div>
   <div class="card-body">
     <h4 class="card-title"><?php echo $guideName."\n"; echo $guideLastName."\n"; ?></h4>
-    <br>
+    <h6 class="blink" > <?php echo $msg?></h6>
     <img src="data:image/jpeg;base64,<?php echo base64_encode( $guideImage) ?>" width=200 height=200/>
     <br>
     <br>
-    <p class="card-text">You Can Contact Him at: <?php echo $guidePhone."\n"; ?> </p>
 
+    <p class="card-text">You Can Contact Him at: <?php echo $guidePhone."\n"; ?> </p>
+    
+    <!-- <input href="addGuide.php?id=<?php echo $guideEmail?>" type="submit" name="submitGuide" class="btnSubmit" value="Add to My list" /> -->
+
+    <!--ADD GUIDE BUTTON-->
+    <button type="submit" class="btn btn-primary" name="submitGuide" 
+    style="color: teal; background-color:green; margin-left: 1.5em;" ><a href="addGuide.php?id=<?php echo $guideEmail?>"> Add to My list</a> </button>
 
 <!------popup window--------->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -218,9 +317,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
 
-<!-- Trigger/Open The Modal -->
-<button id="myBtn">More Details</button>
 
+
+              
+                    
+                
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn" style="display: inline;">More Details</button>
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -228,6 +332,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   <div class="modal-content" >
     <span class="close">&times;</span>
     <p>
+
     <b>Name: </b> <?php echo  $guideName." ".$guideLastName ?><br>
     <b>Phone: </b> <?php echo  $guidePhone ?><br>
     <b>City: </b> <?php echo $city .", ".$country ?><br>
@@ -241,6 +346,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <b>Image :</b> 
     <img src="data:image/jpeg;base64,<?php echo base64_encode( $guideImage) ?>" width=200 height=200/>
     </p>
+
   </div>
   
 </div>

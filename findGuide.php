@@ -18,6 +18,73 @@ $date= date("d/m/Y");
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <title>Find a Local Guide</title>
     <link rel = "icon" href ="openingPageImage/x.png" type="image/x-icon"> 
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .openBtn {
+        display: flex;
+        justify-content: left;
+      }
+      .openButton {
+        border: none;
+        border-radius: 5px;
+        background-color: #1c87c9;
+        color: white;
+        padding: 14px 20px;
+        cursor: pointer;
+        position: fixed;
+      }
+      .loginPopup {
+        position: relative;
+        text-align: center;
+        width: 100%;
+      }
+      .formPopup {
+        display: none;
+        position: fixed;
+        left: 45%;
+        top: 5%;
+        transform: translate(-50%, 5%);
+        border: 3px solid #999999;
+        z-index: 9;
+      }
+      .formContainer {
+        max-width: 300px;
+        padding: 20px;
+        background-color: #fff;
+      }
+      .formContainer input[type=text],
+      .formContainer input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 20px 0;
+        border: none;
+        background: #eee;
+      }
+      .formContainer input[type=text]:focus,
+      .formContainer input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+      }
+      .formContainer .btn {
+        padding: 12px 20px;
+        border: none;
+        background-color: #8ebf42;
+        color: #fff;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+      .formContainer .cancel {
+        background-color: #cc0000;
+      }
+      .formContainer .btn:hover,
+      .openButton:hover {
+        opacity: 1;
+      }
+    </style>
 </head>
 <body>
 
@@ -27,7 +94,6 @@ $date= date("d/m/Y");
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        !imp
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -50,11 +116,11 @@ $date= date("d/m/Y");
       </nav>
 
           <!-- Image -->
-          <div class="text-center">
+          <!-- <div class="text-center">
         <img src="openingPageImage/x.png" class="rounded" alt="x logo" height="100" width="150" style="margin-left: em;">  
       </div>
     <br>
-    <br>
+    <br> -->
 
     <!---------------->
     <?php
@@ -90,11 +156,12 @@ if(isset($_POST['logOutSubmit'])){
 <div id="myTabContent" class="tab-content">
 <br>
   <div class="tab-pane fade active show" id="home">
-  <h5> We will find a relevant guide especially for you based on your travel Preferences! Where you want to travel? </h5>
+  <h5> We will find a relevant guide especially for you based on your travel Preferences! <br> Where you want to travel? </h5>
                 <form action="search_auto.php" method="post">
-                <div class="form-group">
+                 
+                <div class="form-group ">
                 <!------->
-            <select class="form-control" name="countryTraveller" id="countrySelect" value="country">
+            <select class="form-control" name="countryTraveller" id="countrySelect" value="country" style="width: 23%;">
                 <option value="Country">Choose Country</option>
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Åland Islands">Åland Islands</option>
@@ -342,9 +409,10 @@ if(isset($_POST['logOutSubmit'])){
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
           </div>
-
+          
+          
           <div class="form-group">
-            <textarea class="form-control" name="place" id="cityTextarea" rows="1" placeholder="City"></textarea>
+            <textarea class="form-control" name="place" id="cityTextarea" rows="1" placeholder="City" style="width: 23%;"></textarea>
           </div>
           
                 <!-- <input type="text" class="form-control" id="place" name="place" placeholder="Where you want to travell? (city)" value="" />
@@ -352,8 +420,8 @@ if(isset($_POST['logOutSubmit'])){
                 
                 <div class="form-group row">
            <label for="example-date-input" class="col-2 col-form-label">When?</label><br>
-            <div class="col-10">
-              <input class="form-control" type="date" value="<?php echo date("dd-mm-yyyy");?>" name="date" id="example-date-input" style="margin-left: -12em;">
+            <div class="col-10" >
+              <input class="form-control" type="date" value="<?php echo date("dd-mm-yyyy");?>" name="date" id="example-date-input" style="margin-left: -12em; text-align: left; width: 20%;">
             </div>
           </div> 
                <!-- <input type="text" class="form-control" id="time" name="time" placeholder="when? " value="" /-->
@@ -363,7 +431,7 @@ if(isset($_POST['logOutSubmit'])){
 
                     <div class="form-group">
                         <!-- <input type="submit" name="findLocal" class="btnSubmit" style="background-color: blue" value="find" /> -->
-                        <button type="submit" name="findLocal" class="btn btn-primary btn-lg">Find Now</button>
+                        <button type="submit" name="findLocal" class="btn btn-primary btn-lg" style="margin-left:10em;">Find Now</button>
 
                     </div>
                    
@@ -376,21 +444,90 @@ if(isset($_POST['logOutSubmit'])){
 </div>
 <!--------Free Search--------->
   <div class="tab-pane fade" id="profile">
-  <div class="container">
-   <br />
+  <br>
+              <div class="col-md-6 login-form-2">
+                <h3 style="display: inline;">Local Guide Details</h3>
+
+
+                            <table border="2" id="localTable" class="table">
+                            <tr style="font-weight: bold;" class="table-primary">
+                                <td style="width:60%">full Name</td>
+                                <td>Gender</td>
+                                <td>City</td>
+                                <td>Country</td>
+                                <td style="width:20%">Langueges</td>
+                                <td style="width:50%">Travel Styles</td>
+                                <td>Rating</td>
+                                <td>View</td>  
+
+                            </tr>
+
+                            <?php
+
+                            //include "dbConn.php"; // Using database connection file here
+                            $db_user = "root";
+                            $db_pass ="";
+                            $db_name = "useraccounts";
+                            $db_port = 3308;
+                            $mysqli = new mysqli('localhost', $db_user, $db_pass, $db_name,$db_port);
+
+                            $result = $mysqli->query("SELECT * FROM localguideusers");
+                            $arr = $result->fetch_assoc();
+                            
+                            while($data = mysqli_fetch_array($result))
+                            {
+                              $result2 = $mysqli->query("SELECT CAST(AVG(rating) AS DECIMAL(10,1)) AS avg  FROM reviews WHERE localGuide_email='".$data["email"]."'");
+                              $row2 = $result2->fetch_assoc();
+                            
+                            ?>
+                            <tr>
+                            <td ><?php echo $data['firstName'],' ',$data['lastName'] ; ?></td>
+                                <td><?php echo $data['gender']; ?></td>
+                                <td><?php echo $data['city']; ?></td>  
+                                <td><?php echo $data['country']; ?></td>     
+                                <td><?php echo $data['lang1'],' ',$data['lang2'],' ',$data['lang3']; ?></td>
+                                <td><?php echo $data['travelStyle1'],' ',$data['travelStyle2'],' ',$data['travelStyle3']; ?></td>
+                                <td style="color:red;"><?php echo $row2['avg'];?></td>
+                                <td><input type="button" name="view" value="view" id="<?php echo $data["email"]; ?>" class="btn btn-info btn-xs view_data2" /></td>  
+
+                            </tr>	
+                            <?php
+                            }
+                            ?>
+                            </table>
    
-   <div class="form-group">
-     <div class="input-group">
-     <input type="text" name="search_text" id="search_text" placeholder="Search by Name, City or Country" class="form-control" />
+    <div class="openBtn">
+      <button class="openButton" onclick="openForm()"><strong>Open Form</strong></button>
     </div>
-   </div>
-   <br />
-   <div id="result"></div>
-  </div>
-  </div>
+    <div class="loginPopup">
+      <div class="formPopup" id="popupForm">
+        <form action="/action_page.php" class="formContainer">
+          <h2>Please Log in</h2>
+          <label for="email">
+            <strong>E-mail</strong>
+          </label>
+          <input type="text" id="email" placeholder="Your Email" name="email" required>
+          <label for="psw">
+            <strong>Password</strong>
+          </label>
+          <input type="password" id="psw" placeholder="Your Password" name="psw" required>
+          <button type="submit" class="btn">Log in</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+      }
+      function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+      }
+    </script>    
+            </div>
   
-</div>
  <!----------------->
+
  </body>
 </html>
 
@@ -440,3 +577,39 @@ $(document).ready(function(){
     
 </body>
 </html>
+
+<!-----popUp details--->
+<div id="dataModal" class="modal fade">  
+      <div class="modal-dialog">  
+           <div class="modal-content">  
+                <div class="modal-header"> 
+                     <h4 class="modal-title">Local Guide Details</h4>  
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                     
+                </div>  
+                     <div class="modal- body" id="detail"> 
+                </div>  
+                <div class="modal-footer">  
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                </div>  
+           </div>  
+      </div>  
+ </div>
+ <!-----guide script--->  
+ <script>  
+ $(document).ready(function(){  
+      $('.view_data2').click(function(){  
+           var guide_email = $(this).attr("id");  
+           $.ajax({  
+                url:"selectGUIDE.PHP",  
+                method:"post",  
+                data:{guide_email:guide_email},  
+                success:function(data){  
+                     $('#detail').html(data);  
+                     $('#dataModal').modal("show");  
+                }  
+           });  
+      });  
+ });  
+ </script>
+ 
